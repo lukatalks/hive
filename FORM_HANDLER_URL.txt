@@ -1,0 +1,15 @@
+HIVE Membership Form - Google Sheets Integration
+================================================
+
+Google Apps Script Web App URL:
+https://script.google.com/macros/s/AKfycbyN9ZcIIu4OV1SUQCTG2EtiIxs014awwWkEXl1WzBL0YbZ2TH2_v6YjA-balWPtO6Of/exec
+
+Date Configured: January 2025
+
+This URL connects the membership application form to your Google Sheet.
+All form submissions are automatically logged with timestamps.
+
+Google Sheet Name: HIVE Membership Applications
+Owner: Your Google Account
+
+DO NOT share this URL publicly as it allows writing data to your sheet.

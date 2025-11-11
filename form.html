@@ -1,0 +1,663 @@
+<!DOCTYPE HTML>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIVE Business Community | Membership Form</title>
+
+    <!-- Google Fonts - Montserrat to match logo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="Logo 1.png">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .form-hero-logo {
+            margin-bottom: 2rem;
+            animation: formLogoEntrance 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, float 3s ease-in-out 1s infinite;
+            opacity: 0;
+        }
+
+        .form-hero-logo img {
+            height: 150px;
+            max-width: 90vw;
+            width: auto;
+            filter: drop-shadow(0 0 30px rgba(90, 192, 214, 0.5));
+        }
+
+        @keyframes formLogoEntrance {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-5deg);
+                filter: drop-shadow(0 0 0px rgba(90, 192, 214, 0));
+            }
+            60% {
+                transform: scale(1.05) rotate(2deg);
+                filter: drop-shadow(0 0 50px rgba(90, 192, 214, 0.8));
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 30px rgba(90, 192, 214, 0.5));
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .form-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .form-intro {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .form-section {
+            background: rgba(26, 26, 26, 0.6);
+            border: 1px solid rgba(90, 192, 214, 0.2);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .form-section-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: var(--primary-cyan);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .form-group label .required {
+            color: var(--primary-cyan);
+            margin-left: 0.3rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(90, 192, 214, 0.3);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 15px rgba(90, 192, 214, 0.3);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(204, 204, 204, 0.5);
+        }
+
+        .achievements-group {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border: 1px solid rgba(90, 192, 214, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-group:hover {
+            border-color: var(--primary-cyan);
+            background: rgba(90, 192, 214, 0.05);
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--primary-cyan);
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .submit-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--primary-cyan);
+            color: var(--darker-bg);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(90, 192, 214, 0.4);
+            border: none;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(90, 192, 214, 0.6);
+            background: var(--secondary-cyan);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--primary-cyan);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .form-title {
+                font-size: 1.8rem;
+                letter-spacing: 2px;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+            }
+
+            .form-section-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Success Popup */
+        .success-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .success-popup.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .success-content {
+            background: rgba(26, 26, 26, 0.95);
+            border: 2px solid var(--primary-cyan);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            transform: scale(0.8) translateY(50px);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 50px rgba(90, 192, 214, 0.5);
+        }
+
+        .success-popup.show .success-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            color: var(--primary-cyan);
+            animation: successPulse 1s ease-in-out;
+        }
+
+        @keyframes successPulse {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .success-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .success-message {
+            font-size: 1rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .success-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary-cyan);
+            color: var(--darker-bg);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(90, 192, 214, 0.4);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .success-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(90, 192, 214, 0.6);
+            background: var(--secondary-cyan);
+        }
+
+        /* Loading state for submit button */
+        .submit-button.loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            .success-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .success-title {
+                font-size: 1.5rem;
+            }
+
+            .success-icon {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="Logo 1.png" alt="HIVE Logo">
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html#o-hive" class="nav-link" data-en="About HIVE" data-sl="O HIVE-u">O HIVE-u</a></li>
+                <li><a href="index.html#founderji" class="nav-link" data-en="Founders" data-sl="Ustanovitelji">Ustanovitelji</a></li>
+                <li><a href="index.html#kaj-ponujamo" class="nav-link" data-en="Join Us" data-sl="Pridruži se">Pridruži se</a></li>
+            </ul>
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="sl">SL</button>
+                <span class="lang-divider">|</span>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Form Section -->
+    <section class="form-container">
+        <div class="form-header">
+            <div class="form-hero-logo">
+                <img src="hive_hero_logo.png" alt="HIVE Business Community">
+            </div>
+            <h1 class="form-title" data-en="CANDIDATE APPLICATION FORM" data-sl="OBRAZEC ZA KANDIDATE">OBRAZEC ZA KANDIDATE</h1>
+            <p class="form-intro" data-en="Dear potential member of the HIVE association, here is a short questionnaire through which we would like to obtain some important information about you. All the information and data collected will be used exclusively for the purpose of membership in the HIVE association and will not be disclosed or used for other purposes." data-sl="Spoštovani potencialni član združenja HIVE, pred vami je kratek vprašalnik, s katerim bi želeli pridobiti nekaj pomembnih informacij o vas. Vse pridobljene podatke in informacije bomo uporabili izključno za namene včlanitve v združenje HIVE in jih ne bomo razkrili ali uporabili za druge namene.">
+                Spoštovani potencialni član združenja HIVE, pred vami je kratek vprašalnik, s katerim bi želeli pridobiti nekaj pomembnih informacij o vas. Vse pridobljene podatke in informacije bomo uporabili izključno za namene včlanitve v združenje HIVE in jih ne bomo razkrili ali uporabili za druge namene.
+            </p>
+        </div>
+
+        <form id="membership-form" action="#" method="POST">
+            <!-- Personal Data Section -->
+            <div class="form-section">
+                <h2 class="form-section-title" data-en="YOUR PERSONAL DATA" data-sl="VAŠI OSEBNI PODATKI">VAŠI OSEBNI PODATKI</h2>
+
+                <div class="form-group">
+                    <label for="fullname" data-en="Full Name" data-sl="Ime in priimek">Ime in priimek<span class="required">*</span></label>
+                    <input type="text" id="fullname" name="fullname" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" data-en="Email" data-sl="E-pošta">E-pošta<span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" data-en="Phone Number" data-sl="Telefonska številka">Telefonska številka<span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="birthdate" data-en="Date of Birth" data-sl="Rojstni datum">Rojstni datum<span class="required">*</span></label>
+                    <input type="date" id="birthdate" name="birthdate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="residence" data-en="Place of Residence" data-sl="Kraj bivanja">Kraj bivanja</label>
+                    <input type="text" id="residence" name="residence">
+                </div>
+
+                <div class="form-group">
+                    <label for="billing" data-en="Please enter billing information (name, surname, address, tax number - if necessary). Thank you!" data-sl="Prosimo, vnesite podatke za izstavitev računa (naziv - ime, priimek, naslov, davčna številka - če je potrebno). Hvala!">Prosimo, vnesite podatke za izstavitev računa (naziv - ime, priimek, naslov, davčna številka - če je potrebno). Hvala!<span class="required">*</span></label>
+                    <textarea id="billing" name="billing" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="about" data-en="Tell us a few words about yourself - introduce yourself." data-sl="Povejte nekaj besed o sebi - predstavite se.">Povejte nekaj besed o sebi - predstavite se.<span class="required">*</span></label>
+                    <textarea id="about" name="about" required></textarea>
+                </div>
+            </div>
+
+            <!-- Current Status Section -->
+            <div class="form-section">
+                <h2 class="form-section-title" data-en="YOUR CURRENT STATUS" data-sl="VAŠ TRENUTNI STATUS">VAŠ TRENUTNI STATUS</h2>
+
+                <div class="form-group">
+                    <label for="employment" data-en="Employment Status" data-sl="Status zaposlitve">Status zaposlitve<span class="required">*</span></label>
+                    <select id="employment" name="employment" required>
+                        <option value="" data-en="-- Select --" data-sl="-- Izberite --">-- Izberite --</option>
+                        <option value="employed" data-en="Employed by employer" data-sl="Zaposlen pri delodajalcu">Zaposlen pri delodajalcu</option>
+                        <option value="business_owner" data-en="Business Owner" data-sl="Lastnik podjetja">Lastnik podjetja</option>
+                        <option value="self_employed" data-en="Self-employed" data-sl="Samostojni podjetnik">Samostojni podjetnik</option>
+                        <option value="project_work" data-en="Project Work" data-sl="Projektno delo">Projektno delo</option>
+                        <option value="other" data-en="Other" data-sl="Drugo">Drugo</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="company" data-en="Which company are you employed at?" data-sl="V katerem podjetju ste zaposleni?">V katerem podjetju ste zaposleni?<span class="required">*</span></label>
+                    <input type="text" id="company" name="company" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="role" data-en="What is your role or function in the company?" data-sl="Kakšna je vaša vloga oziroma funkcija v podjetju?">Kakšna je vaša vloga oziroma funkcija v podjetju?</label>
+                    <input type="text" id="role" name="role">
+                </div>
+
+                <div class="form-group">
+                    <label for="activities" data-en="Your current activities (what you do, what you work on)" data-sl="Vaše trenutne aktivnosti (s čim se ukvarjate, kaj delate)">Vaše trenutne aktivnosti (s čim se ukvarjate, kaj delate)<span class="required">*</span></label>
+                    <textarea id="activities" name="activities" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="skills" data-en="List your knowledge and experience" data-sl="Naštejte vaša znanja in izkušnje">Naštejte vaša znanja in izkušnje<span class="required">*</span></label>
+                    <textarea id="skills" name="skills" required></textarea>
+                </div>
+            </div>
+
+            <!-- Achievements Section -->
+            <div class="form-section">
+                <h2 class="form-section-title" data-en="YOUR ACHIEVEMENTS" data-sl="VAŠI DOSEŽKI">VAŠI DOSEŽKI</h2>
+
+                <div class="achievements-group">
+                    <div class="form-group">
+                        <label for="achievement1" data-en="Which 3 of your achievements would you highlight? - Achievement 1" data-sl="Katere vaše 3 dosežke bi izpostavili? - Dosežek 1">Katere vaše 3 dosežke bi izpostavili? - 1<span class="required">*</span></label>
+                        <textarea id="achievement1" name="achievement1" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="achievement2" data-en="Achievement 2" data-sl="Dosežek 2">2<span class="required">*</span></label>
+                        <textarea id="achievement2" name="achievement2" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="achievement3" data-en="Achievement 3" data-sl="Dosežek 3">3<span class="required">*</span></label>
+                        <textarea id="achievement3" name="achievement3" rows="3" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="proudest" data-en="Which of these achievements are you particularly proud of and why?" data-sl="Na katerega od navedenih dosežkov ste še posebno ponosni in zakaj?">Na katerega od navedenih dosežkov ste še posebno ponosni in zakaj?<span class="required">*</span></label>
+                    <textarea id="proudest" name="proudest" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="motto" data-en="What is your life motto or guiding principle that you follow?" data-sl="Katero je vaše življensko vodilo oz. moto, ki mu sledite?">Katero je vaše življensko vodilo oz. moto, ki mu sledite?<span class="required">*</span></label>
+                    <textarea id="motto" name="motto" required></textarea>
+                </div>
+            </div>
+
+            <!-- Interest and Motivation Section -->
+            <div class="form-section">
+                <h2 class="form-section-title" data-en="YOUR INTEREST AND MOTIVATION" data-sl="VAŠ INTERES IN MOTIVACIJA">VAŠ INTERES IN MOTIVACIJA</h2>
+
+                <div class="form-group">
+                    <label for="how_learned" data-en="Where did you learn about the HIVE association? If you learned through a member or friend, please specify their name." data-sl="Kje ste izvedeli za združenje HIVE? Če ste izvedeli preko člana ali prijatelja, prosimo navedite specifično ime.">Kje ste izvedeli za združenje HIVE? Če ste izvedeli preko člana ali prijatelja, prosimo navedite specifično ime.</label>
+                    <textarea id="how_learned" name="how_learned"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="reason" data-en="What is the reason you want to join the HIVE association?" data-sl="Kaj je razlog, da se želite pridružiti združenju HIVE?">Kaj je razlog, da se želite pridružiti združenju HIVE?</label>
+                    <textarea id="reason" name="reason"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="contribution" data-en="In which areas do you think you could contribute and help the HIVE association or its members?" data-sl="Na katerih področjih ocenjujete, da bi lahko vi doprinesli in pomagali združenju HIVE oziroma njegovim članom?">Na katerih področjih ocenjujete, da bi lahko vi doprinesli in pomagali združenju HIVE oziroma njegovim članom?<span class="required">*</span></label>
+                    <textarea id="contribution" name="contribution" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="expectations" data-en="How do you want the HIVE association to help you?" data-sl="Na kakšen način želite, da vam združenje HIVE pomaga?">Na kakšen način želite, da vam združenje HIVE pomaga?<span class="required">*</span></label>
+                    <textarea id="expectations" name="expectations" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="goals" data-en="What do you want in the future and what are your goals?" data-sl="Kaj si želite v prihodnosti in kakšni so vaši cilji?">Kaj si želite v prihodnosti in kakšni so vaši cilji?<span class="required">*</span></label>
+                    <textarea id="goals" name="goals" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="references" data-en="Please provide the name of one or three people from your business environment that we can contact for a reference if necessary." data-sl="Prosimo vas, da navedete ime ene ali treh oseb iz vašega poslovnega okolja, ki jih lahko po potrebi kontaktiramo za referenco.">Prosimo vas, da navedete ime ene ali treh oseb iz vašega poslovnega okolja, ki jih lahko po potrebi kontaktiramo za referenco.</label>
+                    <textarea id="references" name="references"></textarea>
+                </div>
+            </div>
+
+            <!-- Consent Section -->
+            <div class="form-section">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="consent_processing" name="consent_processing" required>
+                    <label for="consent_processing" data-en="I allow the HIVE association to process all entered data for the purpose of joining the HIVE association. I also confirm that I am familiar with the Privacy Policy of the HIVE association." data-sl="Združenju HIVE dovoljujem obdelavo vseh vpisanih podatkov za namen priključitve združenju HIVE. Potrjujem tudi, da sem seznanjen s Politiko zasebnosti združenja HIVE.">
+                        Združenju HIVE dovoljujem obdelavo vseh vpisanih podatkov za namen priključitve združenju HIVE. Potrjujem tudi, da sem seznanjen s Politiko zasebnosti združenja HIVE.<span class="required">*</span>
+                    </label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="consent_accuracy" name="consent_accuracy" required>
+                    <label for="consent_accuracy" data-en="I confirm the accuracy of the information provided." data-sl="Potrjujem verodostojnost navedenih podatkov.">
+                        Potrjujem verodostojnost navedenih podatkov.<span class="required">*</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-button" data-en="SUBMIT APPLICATION" data-sl="ODDAJ PRIJAVO">ODDAJ PRIJAVO</button>
+        </form>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link" data-en="← Back to Home" data-sl="← Nazaj na glavno stran">← Nazaj na glavno stran</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="https://hive-connect.org" class="footer-logo">
+                <img src="Logo 1.png" alt="HIVE Logo">
+            </a>
+            <div class="footer-bottom">
+                <p data-en="&copy; 2025 HIVE - Exclusive International Business Association" data-sl="&copy; 2025 HIVE - Ekskluzivno mednarodno poslovno združenje">&copy; 2025 HIVE - Ekskluzivno mednarodno poslovno združenje</p>
+            </div>
+            <div class="footer-contact">
+                <p><a href="https://www.hive-connect.org">WWW.HIVE-CONNECT.ORG</a></p>
+                <p><a href="mailto:info@hive-connect.org">INFO@HIVE-CONNECT.ORG</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Popup -->
+    <div id="success-popup" class="success-popup">
+        <div class="success-content">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <path d="M8 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h2 class="success-title" data-en="Thank you for your application!" data-sl="Hvala za vašo prijavo!">Hvala za vašo prijavo!</h2>
+            <p class="success-message" data-en="Thank you for your interest in joining the HIVE association! We will contact you within a few days after completing and submitting the questionnaire." data-sl="Zahvaljujemo se vam za izkazan interes za včlanitev v združenje HIVE! Kontaktirali vas bomo v nekaj dneh po izpolnitvi in oddaji vprašalnika.">Zahvaljujemo se vam za izkazan interes za včlanitev v združenje HIVE! Kontaktirali vas bomo v nekaj dneh po izpolnitvi in oddaji vprašalnika.</p>
+            <a href="index.html" class="success-button" data-en="Back to Home" data-sl="Nazaj na glavno stran">Nazaj na glavno stran</a>
+        </div>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Form submission handler
+        document.getElementById('membership-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get submit button
+            const submitButton = this.querySelector('.submit-button');
+
+            // Add loading state
+            submitButton.classList.add('loading');
+            submitButton.textContent = currentLang === 'sl' ? 'Pošiljanje...' : 'Sending...';
+            submitButton.disabled = true;
+
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Google Apps Script URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyN9ZcIIu4OV1SUQCTG2EtiIxs014awwWkEXl1WzBL0YbZ2TH2_v6YjA-balWPtO6Of/exec';
+
+            // Send to Google Sheets
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                // Show success popup
+                const popup = document.getElementById('success-popup');
+                popup.classList.add('show');
+
+                // Apply translations to popup content
+                applyTranslations(currentLang);
+
+                // Remove loading state
+                submitButton.classList.remove('loading');
+                submitButton.textContent = currentLang === 'sl' ? 'ODDAJ PRIJAVO' : 'SUBMIT APPLICATION';
+                submitButton.disabled = false;
+
+                // Reset form
+                this.reset();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Still show success since no-cors mode doesn't return errors
+                const popup = document.getElementById('success-popup');
+                popup.classList.add('show');
+                applyTranslations(currentLang);
+
+                submitButton.classList.remove('loading');
+                submitButton.textContent = currentLang === 'sl' ? 'ODDAJ PRIJAVO' : 'SUBMIT APPLICATION';
+                submitButton.disabled = false;
+                this.reset();
+            });
+        });
+    </script>
+</body>
+</html>
