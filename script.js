@@ -252,10 +252,9 @@ grids.forEach(grid => {
 
 // Scroll to top button removed per user request
 
-// Cursor trail effect (subtle)
-let mouseX = 0;
-let mouseY = 0;
+// Cursor trail effect (subtle, debounced with rAF)
 let cursorCircles = [];
+let cursorRafId = null;
 
 const createCursorEffect = () => {
     for (let i = 0; i < 3; i++) {
@@ -276,15 +275,18 @@ const createCursorEffect = () => {
 };
 
 document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    cursorCircles.forEach((circle, index) => {
-        setTimeout(() => {
-            circle.style.left = mouseX + 'px';
-            circle.style.top = mouseY + 'px';
-            circle.style.transform = 'translate(-50%, -50%)';
-        }, index * 50);
+    if (cursorRafId) return;
+    cursorRafId = requestAnimationFrame(() => {
+        const x = e.clientX;
+        const y = e.clientY;
+        cursorCircles.forEach((circle, index) => {
+            setTimeout(() => {
+                circle.style.left = x + 'px';
+                circle.style.top = y + 'px';
+                circle.style.transform = 'translate(-50%, -50%)';
+            }, index * 50);
+        });
+        cursorRafId = null;
     });
 });
 

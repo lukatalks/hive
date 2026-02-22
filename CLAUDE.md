@@ -30,14 +30,18 @@ HIVE one-pager/
 ├── Logo 1.png                              # Navigation & footer logo
 ├── hive_hero_logo.png                      # Hero section logo
 │
-├── mateja_zerbo.png                        # Founder photo (placeholder - AWAITING)
+├── mateja_zerbo_new.png                    # Founder photo
 ├── bosko_prastalo_new.png                  # Founder photos
 ├── mark_kalin_new.png
 ├── Marko_Hozjan_new.png
-├── rok_kragelj_new.png                     # (AWAITING updated photo)
+├── rok_kragelj_new.png                     # Updated photo (v2.2)
 │
-├── FORM_HANDLER_URL.txt                    # Google Sheets Web App URL (NEW)
-├── GOOGLE_SHEETS_SETUP.md                  # Setup guide for form integration (NEW)
+├── api/
+│   └── submit.js                           # Vercel serverless proxy for form submissions
+├── vercel.json                             # Vercel deployment config
+│
+├── FORM_HANDLER_URL.txt                    # Google Sheets Web App URL
+├── GOOGLE_SHEETS_SETUP.md                  # Setup guide for form integration
 │
 └── CLAUDE.md                               # THIS FILE
 ```
@@ -141,8 +145,8 @@ HIVE one-pager/
 
 #### 7. Footer
 - Logo, copyright (bilingual), contact info
-- Website: www.hive-connect.org
-- Email: info@hive-connect.org
+- Website: www.hive-network.org
+- Email: info@hive-network.org
 
 ---
 
@@ -331,7 +335,7 @@ HIVE one-pager/
 #### Option 1: Netlify (Recommended)
 1. Create account at netlify.com
 2. Drag and drop the entire folder
-3. Connect custom domain: hive-connect.org
+3. Connect custom domain: hive-network.org
 4. SSL automatically enabled
 
 #### Option 2: Vercel
@@ -409,8 +413,8 @@ Update CSS variables in `styles.css`:
 
 ## 📞 Contact Information
 
-**Website:** https://www.hive-connect.org
-**Email:** info@hive-connect.org
+**Website:** https://www.hive-network.org
+**Email:** info@hive-network.org
 **Membership Form:** form.html (integrated in website)
 
 ---
@@ -423,20 +427,41 @@ Update CSS variables in `styles.css`:
 #### Bug Fixes:
 - ✅ **Fixed mobile burger menu** - Navigation was always expanded on mobile; now collapses into hamburger toggle
 - ✅ **Updated Rok Kragelj photo** - New professional photo replaces placeholder
+- ✅ **Copyright year** - Updated from 2025 to 2026
+- ✅ **Website URL** - Updated from hive-network.org to hive-network.org across all files
 
 #### Performance Improvements:
 - ✅ **Consolidated scroll handlers** - 3 separate scroll listeners merged into 1 throttled handler using `requestAnimationFrame`
 - ✅ **Moved active nav styles to CSS** - Removed runtime style injection via `document.createElement('style')`
 - ✅ **Removed dead CSS** - Cleaned up `.hexagon-bg`, `.hero-title`, `.scroll-indicator` unused rules
 - ✅ **Removed unused HTML** - Removed empty `.hexagon-bg` div from hero section
+- ✅ **Cursor trail debouncing** - Mousemove handler now uses `requestAnimationFrame` to prevent excessive DOM updates
+- ✅ **Image optimization** - Resized large PNGs to 2x display size with compression (total savings ~900KB+)
+
+#### Accessibility:
+- ✅ **Focus indicators** - Added `:focus-visible` styles for all interactive elements (nav links, buttons, cards)
+- ✅ **Keyboard navigation** - Focus indicators use cyan outline consistent with brand styling
+
+#### SEO:
+- ✅ **Hreflang tags** - Added `<link rel="alternate" hreflang>` for Slovenian, English, and x-default on both pages
+- ✅ **Mateja Zerbo in JSON-LD** - Added to structured data schema
+
+#### Language Detection:
+- ✅ **Location-based detection** - Enhanced to check `navigator.languages` array, `Europe/Ljubljana` timezone, and Intl locale
+- ✅ **Slovenian users** - Automatically get Slovenian content based on browser, timezone, or locale signals
+
+#### Security:
+- ✅ **Server-side form proxy** - Added Vercel serverless function (`/api/submit`) to hide Google Apps Script URL from client
+- ✅ **Proper error handling** - Form now shows user-friendly error messages instead of silently failing
+- ✅ **Removed hardcoded URL** - Google Script URL moved to server-side environment variable
 
 #### Code Quality:
 - ✅ **Added null checks** - Cookie notice code now handles missing elements (prevents errors on form.html)
 - ✅ **Removed console.log** - Production debug logging removed
-- ✅ **SEO fix** - Added Mateja Zerbo to JSON-LD structured data schema
 
 #### Deployment:
 - ✅ **GitHub repository** - Connected to `lukatalks/hive` for Vercel auto-deployment
+- ✅ **Vercel config** - Added `vercel.json` for API routing
 
 ---
 
@@ -549,29 +574,25 @@ Update CSS variables in `styles.css`:
 
 ## ✅ Final Status
 
-**PRODUCTION READY - Version 2.1** ✅
+**PRODUCTION READY - Version 2.2** ✅
 
 This bilingual website is complete and ready for deployment. All major features are implemented and working correctly:
 
 - ✅ Bilingual system functional (SL/EN)
-- ✅ Browser language detection working
-- ✅ Integrated membership form with Google Sheets backend
-- ✅ Form submissions automatically logged to Google Sheets
-- ✅ Updated branding implemented
+- ✅ Location-based language detection (timezone, locale, browser language)
+- ✅ Integrated membership form with server-side proxy
+- ✅ Form submissions via Vercel serverless function to Google Sheets
+- ✅ Updated branding: hive-network.org
 - ✅ Montserrat font applied throughout
-- ✅ 5 founders section updated
+- ✅ 5 founders section with all photos
 - ✅ All translations complete
-- ✅ Responsive design maintained
-- ✅ SEO optimized for both languages
+- ✅ Responsive design with mobile hamburger menu
+- ✅ SEO optimized (hreflang, JSON-LD, meta tags)
+- ✅ Keyboard accessible (focus-visible indicators)
+- ✅ Optimized images (2x retina, compressed PNGs)
+- ✅ Performance optimized (throttled scroll, debounced cursor)
 - ✅ Tooltips properly positioned in all sections
 - ✅ Floating logo on form page
-
-**Completed in v2.2:**
-- ✅ Mobile hamburger menu (was always expanded)
-- ✅ Updated Rok Kragelj photo
-- ✅ Scroll performance optimization
-- ✅ Dead code cleanup
-- ✅ GitHub repo connected (lukatalks/hive)
 
 **Last Updated:** February 2026
 **Status:** Production Ready

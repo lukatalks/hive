@@ -134,11 +134,27 @@ const translations = {
     }
 };
 
-// Detect browser language
+// Detect user language based on browser language, locale, and timezone
 function detectBrowserLanguage() {
-    const browserLang = navigator.language || navigator.userLanguage;
-    // If Slovenian, return 'sl', otherwise default to 'en'
-    return browserLang.toLowerCase().startsWith('sl') ? 'sl' : 'en';
+    // Check all browser languages (ordered by preference)
+    const languages = navigator.languages || [navigator.language || navigator.userLanguage || 'en'];
+    for (const lang of languages) {
+        if (lang.toLowerCase().startsWith('sl')) return 'sl';
+    }
+
+    // Check timezone - Slovenia is in Europe/Ljubljana
+    try {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (tz === 'Europe/Ljubljana') return 'sl';
+    } catch (e) {}
+
+    // Check locale for Slovenian region
+    try {
+        const locale = Intl.DateTimeFormat().resolvedOptions().locale;
+        if (locale && locale.toLowerCase().includes('sl')) return 'sl';
+    } catch (e) {}
+
+    return 'en';
 }
 
 // Set initial language from localStorage or browser detection

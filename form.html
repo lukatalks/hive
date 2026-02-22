@@ -11,6 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="icon" type="image/png" href="Logo 1.png">
+
+    <!-- Hreflang for multilingual SEO -->
+    <link rel="alternate" hreflang="sl" href="https://www.hive-network.org/form.html">
+    <link rel="alternate" hreflang="en" href="https://www.hive-network.org/form.html">
+    <link rel="alternate" hreflang="x-default" href="https://www.hive-network.org/form.html">
+
     <link rel="stylesheet" href="styles.css">
     <style>
         .form-container {
@@ -567,15 +573,15 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <a href="https://hive-connect.org" class="footer-logo">
+            <a href="https://hive-network.org" class="footer-logo">
                 <img src="Logo 1.png" alt="HIVE Logo">
             </a>
             <div class="footer-bottom">
-                <p data-en="&copy; 2025 HIVE - Exclusive International Business Association" data-sl="&copy; 2025 HIVE - Ekskluzivno mednarodno poslovno združenje">&copy; 2025 HIVE - Ekskluzivno mednarodno poslovno združenje</p>
+                <p data-en="&copy; 2026 HIVE - Exclusive International Business Association" data-sl="&copy; 2026 HIVE - Ekskluzivno mednarodno poslovno združenje">&copy; 2026 HIVE - Ekskluzivno mednarodno poslovno združenje</p>
             </div>
             <div class="footer-contact">
-                <p><a href="https://www.hive-connect.org">WWW.HIVE-CONNECT.ORG</a></p>
-                <p><a href="mailto:info@hive-connect.org">INFO@HIVE-CONNECT.ORG</a></p>
+                <p><a href="https://www.hive-network.org">WWW.HIVE-NETWORK.ORG</a></p>
+                <p><a href="mailto:info@hive-network.org">INFO@HIVE-NETWORK.ORG</a></p>
             </div>
         </div>
     </footer>
@@ -617,45 +623,38 @@
                 data[key] = value;
             });
 
-            // Google Apps Script URL
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbyN9ZcIIu4OV1SUQCTG2EtiIxs014awwWkEXl1WzBL0YbZ2TH2_v6YjA-balWPtO6Of/exec';
+            // Submit via server-side proxy (hides Google Script URL from client)
+            const proxyURL = '/api/submit';
 
-            // Send to Google Sheets
-            fetch(scriptURL, {
+            fetch(proxyURL, {
                 method: 'POST',
-                mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data)
             })
-            .then(() => {
+            .then(response => response.json())
+            .then(result => {
                 // Show success popup
                 const popup = document.getElementById('success-popup');
                 popup.classList.add('show');
-
-                // Apply translations to popup content
                 applyTranslations(currentLang);
 
-                // Remove loading state
                 submitButton.classList.remove('loading');
                 submitButton.textContent = currentLang === 'sl' ? 'ODDAJ PRIJAVO' : 'SUBMIT APPLICATION';
                 submitButton.disabled = false;
-
-                // Reset form
                 this.reset();
             })
             .catch((error) => {
-                console.error('Error:', error);
-                // Still show success since no-cors mode doesn't return errors
-                const popup = document.getElementById('success-popup');
-                popup.classList.add('show');
-                applyTranslations(currentLang);
+                // Show error message to user
+                const errorMsg = currentLang === 'sl'
+                    ? 'Prišlo je do napake. Prosimo, poskusite znova.'
+                    : 'An error occurred. Please try again.';
+                alert(errorMsg);
 
                 submitButton.classList.remove('loading');
                 submitButton.textContent = currentLang === 'sl' ? 'ODDAJ PRIJAVO' : 'SUBMIT APPLICATION';
                 submitButton.disabled = false;
-                this.reset();
             });
         });
     </script>
