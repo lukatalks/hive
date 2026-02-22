@@ -146,7 +146,7 @@ HIVE one-pager/
 #### 7. Footer
 - Logo, copyright (bilingual), contact info
 - Website: www.hive-network.org
-- Email: info@hive-network.org
+- Email: info@hive-connect.org
 
 ---
 
@@ -414,7 +414,7 @@ Update CSS variables in `styles.css`:
 ## 📞 Contact Information
 
 **Website:** https://www.hive-network.org
-**Email:** info@hive-network.org
+**Email:** info@hive-connect.org
 **Membership Form:** form.html (integrated in website)
 
 ---

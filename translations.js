@@ -60,7 +60,7 @@ const translations = {
         members_label: "ČLANOV",
 
         // Footer
-        footer_copyright: "HIVE - Ekskluzivno mednarodno poslovno združenje",
+        footer_copyright: "HIVE – Ekskluzivno mednarodno poslovno združenje",
 
         // Cookie Notice
         cookie_text: "Ta spletna stran ne uporablja piškotkov za sledenje. Z izpolnitvijo obrazca za članstvo se strinjate z obdelavo osebnih podatkov.",
@@ -126,7 +126,7 @@ const translations = {
         members_label: "MEMBERS",
 
         // Footer
-        footer_copyright: "HIVE - Exclusive International Business Association",
+        footer_copyright: "HIVE – Exclusive International Business Association",
 
         // Cookie Notice
         cookie_text: "This website does not use tracking cookies. By completing the membership form, you agree to the processing of personal data.",
