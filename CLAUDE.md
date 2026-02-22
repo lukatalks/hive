@@ -3,7 +3,7 @@
 ## Project Overview
 Modern, elegant bilingual website for **HIVE Business Community - Exclusive International Business Association**, a business community for entrepreneurs, managers, and leaders.
 
-**Status:** ✅ **PRODUCTION READY** | **Version:** 2.1 - Form Integration & Tooltip Fixes
+**Status:** ✅ **PRODUCTION READY** | **Version:** 2.2 - Mobile Menu Fix & Optimizations
 
 **Key Features:**
 - Full bilingual support (Slovenian/English)
@@ -12,6 +12,8 @@ Modern, elegant bilingual website for **HIVE Business Community - Exclusive Inte
 - Updated branding: "HIVE Business Community"
 - Montserrat font matching the logo
 - Fixed tooltip positioning in Join Us section
+- Proper mobile hamburger menu (collapsible navigation)
+- Updated Rok Kragelj founder photo
 
 ---
 
@@ -415,7 +417,30 @@ Update CSS variables in `styles.css`:
 
 ## 🎉 Version History
 
-### v2.1 - Form Integration & Tooltip Fixes (Current) ✅
+### v2.2 - Mobile Menu Fix & Optimizations (Current) ✅
+**Update - February 2026**
+
+#### Bug Fixes:
+- ✅ **Fixed mobile burger menu** - Navigation was always expanded on mobile; now collapses into hamburger toggle
+- ✅ **Updated Rok Kragelj photo** - New professional photo replaces placeholder
+
+#### Performance Improvements:
+- ✅ **Consolidated scroll handlers** - 3 separate scroll listeners merged into 1 throttled handler using `requestAnimationFrame`
+- ✅ **Moved active nav styles to CSS** - Removed runtime style injection via `document.createElement('style')`
+- ✅ **Removed dead CSS** - Cleaned up `.hexagon-bg`, `.hero-title`, `.scroll-indicator` unused rules
+- ✅ **Removed unused HTML** - Removed empty `.hexagon-bg` div from hero section
+
+#### Code Quality:
+- ✅ **Added null checks** - Cookie notice code now handles missing elements (prevents errors on form.html)
+- ✅ **Removed console.log** - Production debug logging removed
+- ✅ **SEO fix** - Added Mateja Zerbo to JSON-LD structured data schema
+
+#### Deployment:
+- ✅ **GitHub repository** - Connected to `lukatalks/hive` for Vercel auto-deployment
+
+---
+
+### v2.1 - Form Integration & Tooltip Fixes ✅
 **Update - January 2025**
 
 #### New Features:
@@ -502,26 +527,13 @@ Update CSS variables in `styles.css`:
 
 ## 🔄 Pending Tasks & Future Enhancements
 
-### 📸 Image Updates (PRIORITY)
+### 📸 Image Updates
 
-#### 1. Replace Rok Kragelj Photo
-**Current file:** `rok_kragelj_new.png`
-**Action:** Replace with updated photo
-**Instructions:**
-- Save the new photo with the exact filename: `rok_kragelj_new.png`
-- Place in the same directory as other founder photos
-- Recommended dimensions: ~280x320px (portrait orientation)
-- Format: PNG with transparent background preferred
+#### ~~1. Replace Rok Kragelj Photo~~ ✅ DONE (v2.2)
 
-#### 2. Add Mateja Zerbo Photo
-**Current file:** `mateja_zerbo.png` (placeholder showing "Photo Coming Soon")
-**Action:** Add actual photo
-**Instructions:**
-- Save the photo with the exact filename: `mateja_zerbo.png`
-- Place in the same directory as other founder photos
-- Recommended dimensions: ~280x320px (portrait orientation)
-- Format: PNG with transparent background preferred
-- The code has an `onerror` handler that shows placeholder if image fails to load
+#### 2. Mateja Zerbo Photo
+**Current file:** `mateja_zerbo_new.png` (actual photo now in use)
+**Status:** Photo added, referenced in index.html
 
 ### 📝 Optional Future Enhancements:
 - Text corrections as needed
@@ -554,10 +566,14 @@ This bilingual website is complete and ready for deployment. All major features 
 - ✅ Tooltips properly positioned in all sections
 - ✅ Floating logo on form page
 
-**Remaining Tasks:**
-- Replace `rok_kragelj_new.png` with updated photo
-- Add `mateja_zerbo.png` (currently showing placeholder)
+**Completed in v2.2:**
+- ✅ Mobile hamburger menu (was always expanded)
+- ✅ Updated Rok Kragelj photo
+- ✅ Scroll performance optimization
+- ✅ Dead code cleanup
+- ✅ GitHub repo connected (lukatalks/hive)
 
-**Last Updated:** January 2025
+**Last Updated:** February 2026
 **Status:** Production Ready
-**Version:** 2.1 - Form Integration & Tooltip Fixes
+**Version:** 2.2 - Mobile Menu Fix & Optimizations
+**Repository:** https://github.com/lukatalks/hive

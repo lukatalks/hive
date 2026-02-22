@@ -15,21 +15,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background on scroll - always pure black
-let lastScroll = 0;
+// Navbar reference
 const navbar = document.querySelector('.navbar');
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-
-    if (currentScroll > 100) {
-        navbar.style.boxShadow = '0 5px 20px rgba(90, 192, 214, 0.1)';
-    } else {
-        navbar.style.boxShadow = 'none';
-    }
-
-    lastScroll = currentScroll;
-});
 
 // Intersection Observer for fade-in animations
 const observerOptions = {
@@ -55,18 +42,40 @@ animateElements.forEach(el => {
     observer.observe(el);
 });
 
-// Smooth scrolling effect - no fade out
+// Consolidated scroll handler with throttling
+let scrollTicking = false;
 window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const aboutSection = document.querySelector('.about-section');
+    if (!scrollTicking) {
+        requestAnimationFrame(() => {
+            const scrolled = window.pageYOffset;
 
-    // Fade out transition line when scrolling starts
-    if (aboutSection) {
-        if (scrolled > 50) {
-            aboutSection.classList.add('scrolled');
-        } else {
-            aboutSection.classList.remove('scrolled');
-        }
+            // Navbar shadow
+            navbar.style.boxShadow = scrolled > 100
+                ? '0 5px 20px rgba(90, 192, 214, 0.1)'
+                : 'none';
+
+            // Fade out transition line
+            const aboutSection = document.querySelector('.about-section');
+            if (aboutSection) {
+                aboutSection.classList.toggle('scrolled', scrolled > 50);
+            }
+
+            // Active nav link highlight
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            let current = '';
+            sections.forEach(section => {
+                if (scrolled >= section.offsetTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+            });
+
+            scrollTicking = false;
+        });
+        scrollTicking = true;
     }
 });
 
@@ -187,17 +196,18 @@ document.addEventListener('click', function(e) {
 const cookieNotice = document.getElementById('cookie-notice');
 const cookieAccept = document.getElementById('cookie-accept');
 
-// Check if user has already accepted
-if (!localStorage.getItem('cookieAccepted')) {
-    setTimeout(() => {
-        cookieNotice.classList.add('show');
-    }, 1000);
-}
+if (cookieNotice && cookieAccept) {
+    if (!localStorage.getItem('cookieAccepted')) {
+        setTimeout(() => {
+            cookieNotice.classList.add('show');
+        }, 1000);
+    }
 
-cookieAccept.addEventListener('click', () => {
-    localStorage.setItem('cookieAccepted', 'true');
-    cookieNotice.classList.remove('show');
-});
+    cookieAccept.addEventListener('click', () => {
+        localStorage.setItem('cookieAccepted', 'true');
+        cookieNotice.classList.remove('show');
+    });
+}
 
 // Smooth reveal for images
 const imageObserver = new IntersectionObserver((entries) => {
@@ -217,41 +227,6 @@ images.forEach(img => {
     imageObserver.observe(img);
 });
 
-// Active navigation link highlight
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    let current = '';
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-
-        if (window.pageYOffset >= sectionTop - 200) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-});
-
-// Add CSS for active nav link
-const style = document.createElement('style');
-style.textContent = `
-    .nav-link.active {
-        color: var(--primary-cyan);
-    }
-    .nav-link.active::after {
-        width: 100%;
-    }
-`;
-document.head.appendChild(style);
 
 // Stagger animation for grid items
 const staggerObserver = new IntersectionObserver((entries) => {
@@ -318,44 +293,30 @@ if (window.innerWidth > 768) {
     createCursorEffect();
 }
 
-// Mobile menu toggle (if needed for smaller screens)
-const createMobileMenu = () => {
-    if (window.innerWidth <= 768) {
-        const menuToggle = document.createElement('button');
-        menuToggle.className = 'mobile-menu-toggle';
+// Mobile menu toggle
+const navMenu = document.querySelector('.nav-menu');
+const navContainer = document.querySelector('.nav-container');
+
+// Create hamburger button in HTML (placed after logo, before language switcher)
+const menuToggle = document.createElement('button');
+menuToggle.className = 'mobile-menu-toggle';
+menuToggle.innerHTML = '☰';
+menuToggle.setAttribute('aria-label', 'Toggle navigation menu');
+
+// Insert toggle after the logo
+const languageSwitcher = navContainer.querySelector('.language-switcher');
+navContainer.insertBefore(menuToggle, languageSwitcher);
+
+menuToggle.addEventListener('click', () => {
+    const isOpen = navMenu.classList.toggle('active');
+    menuToggle.innerHTML = isOpen ? '✕' : '☰';
+});
+
+// Close menu when a nav link is clicked
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
         menuToggle.innerHTML = '☰';
-        menuToggle.style.cssText = `
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1001;
-            background: var(--primary-cyan);
-            border: none;
-            color: white;
-            font-size: 24px;
-            width: 40px;
-            height: 40px;
-            border-radius: 5px;
-            cursor: pointer;
-        `;
+    });
+});
 
-        // Show mobile menu toggle on small screens
-        if (window.innerWidth <= 768) {
-            menuToggle.style.display = 'block';
-        }
-
-        document.body.appendChild(menuToggle);
-
-        const navMenu = document.querySelector('.nav-menu');
-
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-    }
-};
-
-window.addEventListener('resize', createMobileMenu);
-createMobileMenu();
-
-console.log('HIVE Website loaded successfully ✓');
